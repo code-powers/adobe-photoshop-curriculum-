@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Design Principles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+        
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .learn-panel {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .interactive-panel {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .sassy-tip {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            border-left: 4px solid #e91e63;
+        }
+        
+        /* Balance Activity Styles */
+        .balance-playground {
+            background: #f8f9fa;
+            border: 2px dashed #6c757d;
+            border-radius: 8px;
+            height: 300px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .draggable-element {
+            position: absolute;
+            cursor: move;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .draggable-element:hover {
+            transform: scale(1.05);
+        }
+        
+        .draggable-element.dragging {
+            opacity: 0.7;
+            transform: rotate(5deg);
+        }
+        
+        .big-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 50%;
+            top: 50px;
+            left: 50px;
+        }
+        
+        .small-square {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            top: 150px;
+            left: 200px;
+        }
+        
+        .medium-triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 52px solid #27ae60;
+            top: 100px;
+            left: 300px;
+            background: none !important;
+        }
+        
+        .text-element {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            padding: 10px;
+            border-radius: 5px;
+            top: 200px;
+            left: 400px;
+        }
+        
+        .balance-feedback {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        /* Emphasis Activity Styles */
+        .emphasis-demo {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .clickable-element {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .clickable-element:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .clickable-element.emphasized {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            transform: scale(1.2);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+            border-color: #f39c12;
+        }
+        
+        .emphasis-controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .emphasis-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .emphasis-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.4);
+        }
+        
+        /* Typography Activity Styles */
+        .font-playground {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .font-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .font-control {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .font-control label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+        
+        .font-control select,
+        .font-control input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .typography-preview {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            margin-top: 20px;
+        }
+        
+        .preview-headline {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .preview-subhead {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+        
+        .preview-body {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
+        /* Composition Activity Styles */
+        .composition-demo {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .photo-frame {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            margin: 15px 0;
+        }
+        
+        .rule-of-thirds-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .rule-of-thirds-grid.visible {
+            opacity: 1;
+        }
+        
+        .grid-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .grid-line.vertical {
+            width: 2px;
+            height: 100%;
+        }
+        
+        .grid-line.horizontal {
+            width: 100%;
+            height: 2px;
+        }
+        
+        .photo-subject {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            border-radius: 50%;
+            cursor: move;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .photo-subject:hover {
+            transform: scale(1.1);
+        }
+        
+        .composition-controls {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .composition-button {
+            background: linear-gradient(135deg, #6c5ce7, #5f3dc4);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .composition-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(108, 92, 231, 0.4);
+        }
+        
+        .feedback-box {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feedback-box.visible {
+            opacity: 1;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .font-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Interactive Design Principles</h1>
+            <p>Learn by doing, not by dying of boredom!</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="showTab('balance')">⚖️ Balance</button>
+            <button class="tab-button" onclick="showTab('emphasis')">🎯 Emphasis</button>
+            <button class="tab-button" onclick="showTab('typography')">🔤 Typography</button>
+            <button class="tab-button" onclick="showTab('composition')">📸 Composition</button>
+        </div>
+
+        <!-- BALANCE TAB -->
+        <div id="balance" class="tab-content active">
+            <div class="activity-grid">
+                <div class="learn-panel">
+                    <h2>⚖️ Balance: Stop Making Lopsided Disasters</h2>
+                    <p>Balance is like arranging furniture - you wouldn't put your couch, TV, and coffee table all in one corner and leave the rest of the room empty, would you?</p>
+                    
+                    <div class="sassy-tip">
+                        You know that feeling when you look at a poster and something just feels... off? Like all the important stuff got shoved to one corner while the rest of the space sits there doing absolutely nothing? That's what happens when balance goes to die.
+                    </div>
+                    
+                    <h3>Types of Balance:</h3>
+                    <ul>
+                        <li><strong>Symmetrical:</strong> Everything mirrors perfectly (formal, safe)</li>
+                        <li><strong>Asymmetrical:</strong> Different elements balance each other (dynamic, modern)</li>
+                        <li><strong>Radial:</strong> Everything radiates from center (energetic, focused)</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-panel">
+                    <h3>🎮 Try It: Drag to Balance</h3>
+                    <p>Drag the elements around to create balance. Watch how the feedback changes!</p>
+                    
+                    <div class="balance-playground" id="balancePlayground">
+                        <div class="draggable-element big-circle" data-weight="4">●</div>
+                        <div class="draggable-element small-square" data-weight="1">■</div>
+                        <div class="draggable-element medium-triangle" data-weight="2">▲</div>
+                        <div class="draggable-element text-element" data-weight="2">TEXT</div>
+                    </div>
+                    
+                    <div class="balance-feedback" id="balanceFeedback">
+                        Drag elements around to see how balance changes!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMPHASIS TAB -->
+        <div id="emphasis" class="tab-content">
+            <div class="activity-grid">
+                <div class="learn-panel">
+                    <h2>🎯 Emphasis: Making Things Actually Noticeable</h2>
+                    <p>Emphasis is like having one person speak clearly while everyone else uses their inside voice. If everyone's screaming, you hear nothing.</p>
+                    
+                    <div class="sassy-tip">
+                        Ever seen a design where everything is screaming for attention at the same volume? It's like being at a party where everyone's talking at once - you end up hearing nothing.
+                    </div>
+                    
+                    <h3>Ways to Create Emphasis:</h3>
+                    <ul>
+                        <li><strong>Size:</strong> Make it bigger than everything else</li>
+                        <li><strong>Color:</strong> Bright color surrounded by neutrals</li>
+                        <li><strong>Position:</strong> Center stage or isolated placement</li>
+                        <li><strong>Contrast:</strong> Light on dark, thick on thin</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-panel">
+                    <h3>🎮 Try It: Create Emphasis</h3>
+                    <p>Click on elements to emphasize them. Notice how your eye is drawn to the emphasized element!</p>
+                    
+                    <div class="emphasis-demo">
+                        <div class="clickable-element" onclick="emphasizeElement(this)">HEADLINE</div>
+                        <div class="clickable-element" onclick="emphasizeElement(this)">Subheading</div>
+                        <div class="clickable-element" onclick="emphasizeElement(this)">Body Text</div>
+                        <div class="clickable-element" onclick="emphasizeElement(this)">BUTTON</div>
+                    </div>
+                    
+                    <div class="emphasis-controls">
+                        <button class="emphasis-button" onclick="resetEmphasis()">Reset All</button>
+                        <button class="emphasis-button" onclick="randomEmphasis()">Random Emphasis</button>
+                    </div>
+                    
+                    <div class="feedback-box" id="emphasisFeedback">
+                        Click on elements to see emphasis in action!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TYPOGRAPHY TAB -->
+        <div id="typography" class="tab-content">
+            <div class="activity-grid">
+                <div class="learn-panel">
+                    <h2>🔤 Typography: Fonts That Don't Make People Cry</h2>
+                    <p>Typography is the art of making text readable without causing eye strain or existential dread.</p>
+                    
+                    <div class="sassy-tip">
+                        Comic Sans for business cards? Just... no. Papyrus for anything? Also no. Using 12 different fonts in one design? Please stop.
+                    </div>
+                    
+                    <h3>Typography Hierarchy:</h3>
+                    <ul>
+                        <li><strong>Headline:</strong> Big, bold, impossible to miss</li>
+                        <li><strong>Subheading:</strong> Medium size, semi-bold</li>
+                        <li><strong>Body Text:</strong> Normal size, readable</li>
+                        <li><strong>Caption:</strong> Smaller, often gray or italic</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-panel">
+                    <h3>🎮 Try It: Live Font Preview</h3>
+                    <p>Adjust the settings and watch your typography change in real-time!</p>
+                    
+                    <div class="font-playground">
+                        <div class="font-controls">
+                            <div class="font-control">
+                                <label>Headline Font:</label>
+                                <select id="headlineFont" onchange="updateTypography()">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Helvetica">Helvetica</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                </select>
+                            </div>
+                            <div class="font-control">
+                                <label>Body Font:</label>
+                                <select id="bodyFont" onchange="updateTypography()">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Georgia" selected>Georgia</option>
+                                    <option value="Helvetica">Helvetica</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                </select>
+                            </div>
+                            <div class="font-control">
+                                <label>Headline Size:</label>
+                                <input type="range" id="headlineSize" min="24" max="48" value="32" onchange="updateTypography()">
+                            </div>
+                            <div class="font-control">
+                                <label>Body Size:</label>
+                                <input type="range" id="bodySize" min="12" max="24" value="16" onchange="updateTypography()">
+                            </div>
+                        </div>
+                        
+                        <div class="typography-preview">
+                            <div class="preview-headline" id="previewHeadline">Bite-Sized Bistro</div>
+                            <div class="preview-subhead" id="previewSubhead">Fresh, Healthy, Fast</div>
+                            <div class="preview-body" id="previewBody">
+                                Our mission is to provide delicious, nutritious meals for busy professionals who don't have time to compromise on health. Every ingredient is carefully sourced, and every dish is crafted with love.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPOSITION TAB -->
+        <div id="composition" class="tab-content">
+            <div class="activity-grid">
+                <div class="learn-panel">
+                    <h2>📸 Composition: Photos That Don't Bore People to Death</h2>
+                    <p>The Rule of Thirds isn't just some arbitrary rule teachers made up. It's based on how human eyes naturally scan images.</p>
+                    
+                    <div class="sassy-tip">
+                        Centering everything makes photos feel static and boring - like yearbook photos where everyone's standing in a line. Stop making mugshot compositions!
+                    </div>
+                    
+                    <h3>Composition Techniques:</h3>
+                    <ul>
+                        <li><strong>Rule of Thirds:</strong> Put interesting stuff at grid intersections</li>
+                        <li><strong>Leading Lines:</strong> Use lines to guide eyes toward your subject</li>
+                        <li><strong>Framing:</strong> Use doorways, windows to frame your subject</li>
+                        <li><strong>Depth:</strong> Keep subject sharp, blur background</li>
+                    </ul>
+                </div>
+                
+                <div class="interactive-panel">
+                    <h3>🎮 Try It: Rule of Thirds</h3>
+                    <p>Drag the subject around and see how different positions affect the composition!</p>
+                    
+                    <div class="photo-frame" onclick="toggleGrid()">
+                        <div class="rule-of-thirds-grid" id="grid">
+                            <div class="grid-line vertical" style="left: 33.33%;"></div>
+                            <div class="grid-line vertical" style="left: 66.66%;"></div>
+                            <div class="grid-line horizontal" style="top: 33.33%;"></div>
+                            <div class="grid-line horizontal" style="top: 66.66%;"></div>
+                        </div>
+                        <div class="photo-subject" id="photoSubject" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">📷</div>
+                    </div>
+                    
+                    <div class="composition-controls">
+                        <button class="composition-button" onclick="toggleGrid()">Toggle Grid</button>
+                        <button class="composition-button" onclick="centerSubject()">Center Subject</button>
+                        <button class="composition-button" onclick="ruleOfThirds()">Rule of Thirds</button>
+                    </div>
+                    
+                    <div class="feedback-box" id="compositionFeedback">
+                        Click "Toggle Grid" to see the Rule of Thirds grid!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill">0% Complete</div>
+        </div>
+    </div>
+
+    <script>
+        let interactions = 0;
+        const totalInteractions = 20;
+
+        function updateProgress() {
+            interactions = Math.min(interactions + 1, totalInteractions);
+            const percentage = Math.round((interactions / totalInteractions) * 100);
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '% Complete';
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate clicked button
+            event.target.classList.add('active');
+            
+            updateProgress();
+        }
+
+        // Balance Activity
+        let draggedElement = null;
+
+        function makeDraggable() {
+            const elements = document.querySelectorAll('.draggable-element');
+            elements.forEach(element => {
+                element.addEventListener('mousedown', startDrag);
+                element.addEventListener('dragstart', e => e.preventDefault());
+            });
+
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+        }
+
+        function startDrag(e) {
+            draggedElement = e.target;
+            draggedElement.classList.add('dragging');
+            
+            const rect = draggedElement.getBoundingClientRect();
+            const playgroundRect = document.getElementById('balancePlayground').getBoundingClientRect();
+            
+            draggedElement.offsetX = e.clientX - rect.left;
+            draggedElement.offsetY = e.clientY - rect.top;
+            
+            updateProgress();
+        }
+
+        function drag(e) {
+            if (!draggedElement) return;
+            
+            const playground = document.getElementById('balancePlayground');
+            const playgroundRect = playground.getBoundingClientRect();
+            
+            let newX = e.clientX - playgroundRect.left - draggedElement.offsetX;
+            let newY = e.clientY - playgroundRect.top - draggedElement.offsetY;
+            
+            // Keep within bounds
+            newX = Math.max(0, Math.min(newX, playground.offsetWidth - draggedElement.offsetWidth));
+            newY = Math.max(0, Math.min(newY, playground.offsetHeight - draggedElement.offsetHeight));
+            
+            draggedElement.style.left = newX + 'px';
+            draggedElement.style.top = newY + 'px';
+            
+            checkBalance();
+        }
+
+        function endDrag() {
+            if (draggedElement) {
+                draggedElement.classList.remove('dragging');
+                draggedElement = null;
+            }
+        }
+
+        function checkBalance() {
+            const playground = document.getElementById('balancePlayground');
+            const elements = playground.querySelectorAll('.draggable-element');
+            const playgroundWidth = playground.offsetWidth;
+            
+            let leftWeight = 0, rightWeight = 0;
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const playgroundRect = playground.getBoundingClientRect();
+                const centerX = (rect.left + rect.width/2) - playgroundRect.left;
+                const weight = parseInt(element.dataset.weight);
+                
+                if (centerX < playgroundWidth / 2) {
+                    leftWeight += weight;
+                } else {
+                    rightWeight += weight;
+                }
+            });
+            
+            const feedback = document.getElementById('balanceFeedback');
+            const difference = Math.abs(leftWeight - rightWeight);
+            
+            if (difference === 0) {
+                feedback.textContent = "Perfect balance! 🎯 The visual weight is perfectly distributed!";
+                feedback.style.background = "#d4edda";
+            } else if (difference <= 1) {
+                feedback.textContent = "Great balance! ✅ Just slightly off, but very good!";
+                feedback.style.background = "#d1ecf1";
+            } else if (difference <= 2) {
+                feedback.textContent = "Getting there! ⚖️ Try adjusting the elements a bit more.";
+                feedback.style.background = "#fff3cd";
+            } else {
+                feedback.textContent = "Unbalanced! ❌ One side is much heavier than the other.";
+                feedback.style.background = "#f8d7da";
+            }
+        }
+
+        // Emphasis Activity
+        function emphasizeElement(element) {
+            // Remove emphasis from all elements
+            const elements = document.querySelectorAll('.clickable-element');
+            elements.forEach(el => el.classList.remove('emphasized'));
+            
+            // Add emphasis to clicked element
+            element.classList.add('emphasized');
+            
+            const feedback = document.getElementById('emphasisFeedback');
+            feedback.textContent = `Great! The "${element.textContent}" now has emphasis and draws the eye first!`;
+            feedback.classList.add('visible');
+            
+            updateProgress();
+        }
+
+        function resetEmphasis() {
+            const elements = document.querySelectorAll('.clickable-element');
+            elements.forEach(el => el.classList.remove('emphasized'));
+            
+            const feedback = document.getElementById('emphasisFeedback');
+            feedback.textContent = "All elements reset! Notice how nothing stands out now?";
+            feedback.classList.add('visible');
+            
+            updateProgress();
+        }
+
+        function randomEmphasis() {
+            const elements = document.querySelectorAll('.clickable-element');
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            emphasizeElement(randomElement);
+        }
+
+        // Typography Activity
+        function updateTypography() {
+            const headlineFont = document.getElementById('headlineFont').value;
+            const bodyFont = document.getElementById('bodyFont').value;
+            const headlineSize = document.getElementById('headlineSize').value;
+            const bodySize = document.getElementById('bodySize').value;
+            
+            const headline = document.getElementById('previewHeadline');
+            const subhead = document.getElementById('previewSubhead');
+            const body = document.getElementById('previewBody');
+            
+            headline.style.fontFamily = headlineFont;
+            headline.style.fontSize = headlineSize + 'px';
+            
+            subhead.style.fontFamily = headlineFont;
+            subhead.style.fontSize = (parseInt(headlineSize) * 0.7) + 'px';
+            
+            body.style.fontFamily = bodyFont;
+            body.style.fontSize = bodySize + 'px';
+            
+            updateProgress();
+        }
+
+        // Composition Activity
+        let gridVisible = false;
+        let isDraggingSubject = false;
+
+        function toggleGrid() {
+            const grid = document.getElementById('grid');
+            gridVisible = !gridVisible;
+            
+            if (gridVisible) {
+                grid.classList.add('visible');
+            } else {
+                grid.classList.remove('visible');
+            }
+            
+            const feedback = document.getElementById('compositionFeedback');
+            feedback.textContent = gridVisible ? 
+                "Grid ON! Notice the intersection points - that's where subjects look best!" : 
+                "Grid OFF! Can you still feel where the strong positions are?";
+            feedback.classList.add('visible');
+            
+            updateProgress();
+        }
+
+        function centerSubject() {
+            const subject = document.getElementById('photoSubject');
+            subject.style.top = '50%';
+            subject.style.left = '50%';
+            subject.style.transform = 'translate(-50%, -50%)';
+            
+            const feedback = document.getElementById('compositionFeedback');
+            feedback.textContent = "Centered! Notice how static and boring this feels? Like a mugshot!";
+            feedback.classList.add('visible');
+            
+            updateProgress();
+        }
+
+        function ruleOfThirds() {
+            const subject = document.getElementById('photoSubject');
+            subject.style.top = '33%';
+            subject.style.left = '66%';
+            subject.style.transform = 'translate(-50%, -50%)';
+            
+            const feedback = document.getElementById('compositionFeedback');
+            feedback.textContent = "Rule of Thirds! Much more dynamic and interesting, right?";
+            feedback.classList.add('visible');
+            
+            updateProgress();
+        }
+
+        function makeSubjectDraggable() {
+            const subject = document.getElementById('photoSubject');
+            const photoFrame = document.querySelector('.photo-frame');
+            
+            subject.addEventListener('mousedown', startSubjectDrag);
+            document.addEventListener('mousemove', dragSubject);
+            document.addEventListener('mouseup', endSubjectDrag);
+        }
+
+        function startSubjectDrag(e) {
+            e.stopPropagation();
+            isDraggingSubject = true;
+            
+            const subject = document.getElementById('photoSubject');
+            const rect = subject.getBoundingClientRect();
+            const frameRect = document.querySelector('.photo-frame').getBoundingClientRect();
+            
+            subject.offsetX = e.clientX - rect.left - rect.width/2;
+            subject.offsetY = e.clientY - rect.top - rect.height/2;
+            
+            updateProgress();
+        }
+
+        function dragSubject(e) {
+            if (!isDraggingSubject) return;
+            
+            const subject = document.getElementById('photoSubject');
+            const frame = document.querySelector('.photo-frame');
+            const frameRect = frame.getBoundingClientRect();
+            
+            let newX = ((e.clientX - frameRect.left - subject.offsetX) / frameRect.width) * 100;
+            let newY = ((e.clientY - frameRect.top - subject.offsetY) / frameRect.height) * 100;
+            
+            // Keep within bounds
+            newX = Math.max(10, Math.min(newX, 90));
+            newY = Math.max(10, Math.min(newY, 90));
+            
+            subject.style.left = newX + '%';
+            subject.style.top = newY + '%';
+            subject.style.transform = 'translate(-50%, -50%)';
+            
+            checkComposition(newX, newY);
+        }
+
+        function endSubjectDrag() {
+            isDraggingSubject = false;
+        }
+
+        function checkComposition(x, y) {
+            const feedback = document.getElementById('compositionFeedback');
+            
+            // Check if near rule of thirds intersections
+            const intersections = [
+                {x: 33, y: 33}, {x: 66, y: 33},
+                {x: 33, y: 66}, {x: 66, y: 66}
+            ];
+            
+            let nearIntersection = false;
+            intersections.forEach(point => {
+                const distance = Math.sqrt(Math.pow(x - point.x, 2) + Math.pow(y - point.y, 2));
+                if (distance < 10) {
+                    nearIntersection = true;
+                }
+            });
+            
+            if (nearIntersection) {
+                feedback.textContent = "Excellent! You're using the Rule of Thirds - this creates visual interest!";
+                feedback.style.background = "linear-gradient(135deg, #00b894, #00a085)";
+            } else if (Math.abs(x - 50) < 10 && Math.abs(y - 50) < 10) {
+                feedback.textContent = "Dead center - this feels static and boring, like a passport photo!";
+                feedback.style.background = "linear-gradient(135deg, #fdcb6e, #e17055)";
+            } else {
+                feedback.textContent = "Try moving closer to the grid intersections for stronger composition!";
+                feedback.style.background = "linear-gradient(135deg, #74b9ff, #0984e3)";
+            }
+            
+            feedback.classList.add('visible');
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            makeDraggable();
+            makeSubjectDraggable();
+            updateTypography();
+            checkBalance();
+            
+            // Add some initial feedback
+            setTimeout(() => {
+                document.getElementById('balanceFeedback').textContent = "Start by dragging the big red circle! 🔴";
+                document.getElementById('emphasisFeedback').textContent = "Click on any element to give it emphasis! ✨";
+                document.getElementById('compositionFeedback').textContent = "Drag the camera emoji around the photo! 📸";
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

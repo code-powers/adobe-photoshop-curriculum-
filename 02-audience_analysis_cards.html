@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Audience Analysis Activity Cards</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        .card-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #E91E63;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .card-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            padding-left: 40px;
+        }
+        .points {
+            background: #FFD700;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            float: right;
+            margin-top: -5px;
+        }
+        .card-content {
+            padding: 25px;
+        }
+        .learn-section {
+            background: #FFF3E0;
+            border: 3px solid #FF9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .learn-title {
+            color: #E65100;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .key-info {
+            background: #E3F2FD;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .bad-example {
+            background: #FFEBEE;
+            border: 3px solid #F44336;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .good-example {
+            background: #E8F5E8;
+            border: 3px solid #4CAF50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .task-section {
+            background: #F1F8E9;
+            border: 3px solid #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .task-title {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .submit-section {
+            background: #FCE4EC;
+            border: 3px solid #E91E63;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .submit-title {
+            color: #C2185B;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .persona-template {
+            background: #F8F9FA;
+            border: 2px solid #6C757D;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .scenario-box {
+            background: #E1F5FE;
+            border: 2px solid #0288D1;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .timer {
+            background: #FF5722;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .submission-format {
+            background: #E1F5FE;
+            border: 2px solid #0288D1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .device-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .device-card {
+            background: #E8F5E8;
+            border: 2px solid #4CAF50;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .accessibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .accessibility-card {
+            background: #FFF3E0;
+            border: 2px solid #FF9800;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 TARGET AUDIENCE ANALYSIS</h1>
+            <h2>Learn-As-You-Go Activity Cards</h2>
+            <p><em>Design for real people, not "everyone"!</em></p>
+        </div>
+
+        <!-- CARD 1 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">1</div>
+                <div class="card-title">Why "Everyone" is the Wrong Answer</div>
+                <div class="points">15 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 8 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: Target Audience Basics</div>
+                    <p><strong>Target Audience = The specific group of people who will actually use your design.</strong></p>
+                    
+                    <div class="key-info">
+                        <strong>The Golden Rule:</strong> If you design for "everyone," you design for no one. Specific is better than general!
+                    </div>
+
+                    <div class="comparison-grid">
+                        <div class="bad-example">
+                            <strong>❌ BAD:</strong> "Everyone will love this!"<br>
+                            <strong>❌ BAD:</strong> "All ages, all incomes"<br>
+                            <strong>❌ BAD:</strong> "Anyone who likes food"
+                        </div>
+                        <div class="good-example">
+                            <strong>✅ GOOD:</strong> "Busy professionals, 25-40, who order lunch on phones"<br>
+                            <strong>✅ GOOD:</strong> "College students with limited budgets"<br>
+                            <strong>✅ GOOD:</strong> "Senior citizens learning technology"
+                        </div>
+                    </div>
+
+                    <div class="key-info">
+                        <strong>Why This Matters:</strong> A banking app for teenagers looks COMPLETELY different than one for seniors. Same function, different design!
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Fix the Bad Audiences</div>
+                    <p>These businesses made the "everyone" mistake. Fix their target audiences:</p>
+                    <ol>
+                        <li><strong>Gaming App:</strong> "Everyone who likes fun" → Make it specific!</li>
+                        <li><strong>Fitness Tracker:</strong> "All people who want to be healthy" → Make it specific!</li>
+                        <li><strong>Pizza Restaurant:</strong> "Anyone who eats pizza" → Make it specific!</li>
+                        <li><strong>Study App:</strong> "All students everywhere" → Make it specific!</li>
+                    </ol>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Target_Audience_Fix"<br>
+                        <strong>For each business:</strong><br>
+                        • Write a specific target audience (age, interests, situation)<br>
+                        • Explain WHY your choice is better than "everyone"<br>
+                        <strong>Submit for grading!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">2</div>
+                <div class="card-title">Build a Persona - Create Your Fake Customer</div>
+                <div class="points">25 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 15 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: What is a Persona?</div>
+                    <p><strong>Persona = A fake person who represents your real customers.</strong> Like creating a character for a story!</p>
+                    
+                    <div class="key-info">
+                        <strong>Why Create Fake People?</strong> It's easier to design for "Sarah the busy nurse" than "working professionals aged 25-40."
+                    </div>
+
+                    <div class="persona-template">
+                        <strong>📋 PERSONA TEMPLATE:</strong><br>
+                        <strong>Name:</strong> Give them a real name<br>
+                        <strong>Age:</strong> Specific age, not range<br>
+                        <strong>Job:</strong> What they do for work<br>
+                        <strong>Tech Skills:</strong> Expert, average, or beginner?<br>
+                        <strong>Daily Routine:</strong> When/where do they use your design?<br>
+                        <strong>Biggest Problem:</strong> What frustrates them most?<br>
+                        <strong>Goals:</strong> What do they want to accomplish?
+                    </div>
+
+                    <div class="good-example">
+                        <strong>✅ EXAMPLE PERSONA:</strong><br>
+                        <strong>Name:</strong> Marcus, 28<br>
+                        <strong>Job:</strong> Marketing manager at tech startup<br>
+                        <strong>Tech Skills:</strong> High - uses 10+ apps daily<br>
+                        <strong>Routine:</strong> Orders lunch on phone while walking between meetings<br>
+                        <strong>Problem:</strong> Never has time to wait in line for food<br>
+                        <strong>Goal:</strong> Healthy meal in under 2 minutes of app time
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Create a Persona for Bite-Sized Bistro</div>
+                    <p><strong>Your Client:</strong> Bite-Sized Bistro (healthy fast-casual restaurant with mobile ordering)</p>
+                    
+                    <div class="scenario-box">
+                        <strong>The Challenge:</strong> Create a persona for someone who would order healthy food on their phone during a busy workday.
+                    </div>
+                    
+                    <p>Use the template above to create a detailed persona. Be specific - give them a name, personality, and real problems!</p>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Bistro_Persona"<br>
+                        <strong>Include all 7 persona elements:</strong><br>
+                        • Name & age<br>
+                        • Job description<br>
+                        • Tech skill level<br>
+                        • Daily routine<br>
+                        • Biggest problem<br>
+                        • Main goal<br>
+                        <strong>Make them feel like a real person!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">3</div>
+                <div class="card-title">Device & Platform Detective</div>
+                <div class="points">20 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 10 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: Where Will They See Your Design?</div>
+                    <p><strong>Platform = Where your design lives (website, app, billboard, business card, etc.)</strong></p>
+                    
+                    <div class="key-info">
+                        <strong>The Rule:</strong> Different platforms need different designs. A business card design won't work on a billboard!
+                    </div>
+
+                    <div class="device-list">
+                        <div class="device-card">📱 <strong>Phone</strong><br>Small screen<br>Touch interface</div>
+                        <div class="device-card">💻 <strong>Computer</strong><br>Large screen<br>Mouse clicks</div>
+                        <div class="device-card">🖨️ <strong>Print</strong><br>Physical paper<br>No interaction</div>
+                        <div class="device-card">📺 <strong>Billboards</strong><br>Huge size<br>Viewed from far</div>
+                        <div class="device-card">⌚ <strong>Smart Watch</strong><br>Tiny screen<br>Quick glances</div>
+                        <div class="device-card">📧 <strong>Email</strong><br>Various sizes<br>Quick scanning</div>
+                    </div>
+
+                    <div class="comparison-grid">
+                        <div class="bad-example">
+                            <strong>❌ WRONG:</strong> Tiny text on a phone screen<br>
+                            <strong>❌ WRONG:</strong> Complex design on a smart watch<br>
+                            <strong>❌ WRONG:</strong> Lots of details on a billboard
+                        </div>
+                        <div class="good-example">
+                            <strong>✅ RIGHT:</strong> Large buttons for phone tapping<br>
+                            <strong>✅ RIGHT:</strong> Simple icons for watch<br>
+                            <strong>✅ RIGHT:</strong> Big, bold text for billboards
+                        </div>
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Platform Planning for Your Persona</div>
+                    <p>Think about your Bite-Sized Bistro persona from Card 2. Answer these questions:</p>
+                    <ol>
+                        <li><strong>Primary device:</strong> How will they mostly interact with the restaurant? (phone app, website, etc.)</li>
+                        <li><strong>Secondary platforms:</strong> Where else might they see the restaurant's design? (social media, signs, etc.)</li>
+                        <li><strong>Context:</strong> Are they rushing, relaxed, distracted, focused?</li>
+                        <li><strong>Design needs:</strong> What size text/buttons do they need? Simple or detailed?</li>
+                    </ol>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Platform_Analysis"<br>
+                        <strong>Answer all 4 questions above</strong><br>
+                        <strong>Connect your answers to your persona from Card 2</strong><br>
+                        <strong>Submit for grading!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">4</div>
+                <div class="card-title">Accessibility & Inclusion Check</div>
+                <div class="points">20 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 12 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: Designing for Everyone's Abilities</div>
+                    <p><strong>Accessibility = Making sure people with disabilities can use your design too.</strong></p>
+                    
+                    <div class="key-info">
+                        <strong>Why This Matters:</strong> 15% of people have some form of disability. That's potentially 15% of your customers!
+                    </div>
+
+                    <div class="accessibility-grid">
+                        <div class="accessibility-card">
+                            <strong>👁️ Vision Issues</strong><br>
+                            • Color blindness<br>
+                            • Low vision<br>
+                            • Total blindness
+                        </div>
+                        <div class="accessibility-card">
+                            <strong>👂 Hearing Issues</strong><br>
+                            • Partial hearing loss<br>
+                            • Total deafness<br>
+                            • Audio processing
+                        </div>
+                        <div class="accessibility-card">
+                            <strong>✋ Motor Issues</strong><br>
+                            • Limited hand mobility<br>
+                            • Tremors<br>
+                            • Paralysis
+                        </div>
+                        <div class="accessibility-card">
+                            <strong>🧠 Cognitive Issues</strong><br>
+                            • Learning disabilities<br>
+                            • Memory problems<br>
+                            • Attention disorders
+                        </div>
+                    </div>
+
+                    <div class="good-example">
+                        <strong>✅ SIMPLE SOLUTIONS:</strong><br>
+                        • High contrast colors (helps low vision)<br>
+                        • Large clickable buttons (helps motor issues)<br>
+                        • Simple language (helps cognitive issues)<br>
+                        • Captions on videos (helps hearing issues)
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Accessibility Audit</div>
+                    <p>Think about your Bite-Sized Bistro persona and mobile app. For each accessibility type, answer:</p>
+                    <ol>
+                        <li><strong>Vision:</strong> What if your persona couldn't see colors clearly? What design changes would help?</li>
+                        <li><strong>Hearing:</strong> What if they couldn't hear notification sounds? How would they know their order is ready?</li>
+                        <li><strong>Motor:</strong> What if they had shaky hands? How big should buttons be?</li>
+                        <li><strong>Cognitive:</strong> What if they get overwhelmed easily? How can you simplify the ordering process?</li>
+                    </ol>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Accessibility_Audit"<br>
+                        <strong>For each accessibility type:</strong><br>
+                        • Describe the potential challenge<br>
+                        • Suggest 2 specific design solutions<br>
+                        <strong>Show you care about ALL users!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">5</div>
+                <div class="card-title">Final Challenge: Complete Audience Strategy</div>
+                <div class="points">30 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 20 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 REAL-WORLD APPLICATION</div>
+                    <p>Now combine everything you've learned into a complete audience strategy that a real design agency would present to a client!</p>
+                    
+                    <div class="scenario-box">
+                        <strong>The Situation:</strong> You're presenting to the owner of Bite-Sized Bistro. They want to launch a mobile app but aren't sure who to target or how to design it. Your job is to convince them you understand their customers better than anyone!
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Create the Ultimate Audience Strategy</div>
+                    <p>Combine all your work from Cards 1-4 into one comprehensive document that includes:</p>
+                    <ol>
+                        <li><strong>Primary Persona:</strong> Your detailed customer profile from Card 2</li>
+                        <li><strong>Platform Strategy:</strong> Your device/platform analysis from Card 3</li>
+                        <li><strong>Accessibility Plan:</strong> Your inclusion strategy from Card 4</li>
+                        <li><strong>Design Implications:</strong> Based on everything above, what should the app look/feel like?</li>
+                        <li><strong>Success Metrics:</strong> How will you know if your audience strategy worked?</li>
+                    </ol>
+                    
+                    <div class="key-info">
+                        <strong>Pro Tip:</strong> Write this like you're trying to win a $50,000 contract. Be professional but enthusiastic!
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 FINAL SUBMISSION TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Bistro_Audience_Strategy"<br><br>
+                        <strong>Include all 5 sections above with:</strong><br>
+                        • Clear headers for each section<br>
+                        • Specific details and examples<br>
+                        • Professional language<br>
+                        • Your reasoning for each decision<br><br>
+                        <strong>This is your final audience analysis grade!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px;">
+            <h3>🎯 AUDIENCE ANALYSIS COMPLETE!</h3>
+            <p style="font-size: 1.2em; margin: 0;">You now know your customer better than most businesses know theirs!</p>
+            <p style="margin: 10px 0 0 0;"><strong>Total Points Possible: 110</strong></p>
+        </div>
+    </div>
+</body>
+</html>

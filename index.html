@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright & Legal Research - Enhanced</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Quick Reference Sidebar */
+        .sidebar {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        .sidebar h3 {
+            color: #ecf0f1;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+        .key-term {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+            font-size: 0.9em;
+        }
+        .key-term strong {
+            color: #3498db;
+        }
+        
+        /* Tooltips */
+        .tooltip {
+            position: relative;
+            border-bottom: 2px dotted #3498db;
+            cursor: help;
+            color: #2980b9;
+            font-weight: bold;
+        }
+        .tooltip .tooltip-content {
+            visibility: hidden;
+            width: 300px;
+            background: #2c3e50;
+            color: white;
+            text-align: left;
+            border-radius: 8px;
+            padding: 15px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -150px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .tooltip .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2c3e50 transparent transparent transparent;
+        }
+        .tooltip:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Help Button */
+        .help-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        .help-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+        }
+        
+        /* Help Modal */
+        .help-modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .help-modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+        .close:hover {
+            color: #e74c3c;
+        }
+        
+        /* Original styles from your card */
+        .header {
+            background: linear-gradient(45d, #FF1744, #F50057);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .activity-card {
+            padding: 25px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 20px;
+            margin: -25px -25px 20px -25px;
+            position: relative;
+        }
+        .card-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #FF5722;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .card-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            padding-left: 40px;
+        }
+        .points {
+            background: #FFD700;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            float: right;
+            margin-top: -5px;
+        }
+        .timer {
+            background: #FF5722;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .learn-section {
+            background: #E3F2FD;
+            border: 3px solid #2196F3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .learn-title {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .key-info {
+            background: #FFF3E0;
+            border-left: 5px solid #FF9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .warning-box {
+            background: #FFEBEE;
+            border: 3px solid #F44336;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .task-section {
+            background: #F1F8E9;
+            border: 3px solid #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .task-title {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .submit-section {
+            background: #FCE4EC;
+            border: 3px solid #E91E63;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .submit-title {
+            color: #C2185B;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .website-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .website-card {
+            background: #E8F5E8;
+            border: 2px solid #4CAF50;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .submission-format {
+            background: #E1F5FE;
+            border: 2px solid #0288D1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                order: -1;
+                position: relative;
+                top: auto;
+            }
+            .help-modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="header">
+                <h1>⚖️ COPYRIGHT & LEGAL RESEARCH</h1>
+                <h2>Learn-As-You-Go Activity Cards</h2>
+                <p><em>Don't get sued! Learn copyright basics while finding legal images</em></p>
+            </div>
+
+            <!-- CARD 1 -->
+            <div class="activity-card">
+                <div class="card-header">
+                    <div class="card-number">1</div>
+                    <div class="card-title">Copyright Basics - The "Don't Get Sued" Rules</div>
+                    <div class="points">15 POINTS</div>
+                    <div style="clear: both;"></div>
+                </div>
+                
+                <div class="timer">⏰ 8 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: What is Copyright?</div>
+                    <p><strong><span class="tooltip">Copyright<span class="tooltip-content">Legal protection automatically given to original creative works the moment they're created. Includes photos, art, music, writing, and other creative work.</span></span> = Legal protection for creative work.</strong> Think of it like a "Do Not Touch" sign on someone's art.</p>
+                    
+                    <div class="key-info">
+                        <strong>The Rule:</strong> If someone created it, they own it. You can't use it without permission (unless it's free or you buy a <span class="tooltip">license<span class="tooltip-content">A legal agreement that gives you permission to use someone's copyrighted work under specific conditions.</span></span>).
+                    </div>
+
+                    <div class="warning-box">
+                        🚨 <strong>Reality Check:</strong> Using the wrong image can cost $150,000 in fines! That's not a joke - it's real lawsuits.
+                    </div>
+
+                    <p><strong>What's Protected by Copyright:</strong></p>
+                    <ul>
+                        <li>Photos (even phone pics)</li>
+                        <li>Artwork and illustrations</li>
+                        <li>Logo designs</li>
+                        <li>Music and videos</li>
+                    </ul>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Copyright Detective Quiz</div>
+                    <p>Answer these questions to test your understanding:</p>
+                    <ol>
+                        <li>Can you use any image you find on Google Images? (Yes/No)</li>
+                        <li>If an image doesn't have a © symbol, is it free to use? (Yes/No)</li>
+                        <li>What could happen if you use a copyrighted image illegally?</li>
+                        <li>Name 2 types of creative work protected by copyright.</li>
+                    </ol>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Copyright_Quiz"<br>
+                        <strong>Answer all 4 questions above</strong><br>
+                        <strong>Turn it in for immediate grading!</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="activity-card">
+                <div class="card-header">
+                    <div class="card-number">2</div>
+                    <div class="card-title">Safe Image Sources - Where to Find Legal Images</div>
+                    <div class="points">20 POINTS</div>
+                    <div style="clear: both;"></div>
+                </div>
+                
+                <div class="timer">⏰ 10 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: Safe Places to Find Images</div>
+                    <p>Not all websites are equal! Some give you legal protection, others are copyright traps.</p>
+                    
+                    <div class="website-list">
+                        <div class="website-card">
+                            <strong>Unsplash.com</strong><br>
+                            ✅ Free<br>
+                            ✅ <span class="tooltip">Commercial use<span class="tooltip-content">Using images for business purposes, like advertising, marketing, or selling products/services.</span></span> OK<br>
+                            ⚠️ Check each image
+                        </div>
+                        <div class="website-card">
+                            <strong>Pexels.com</strong><br>
+                            ✅ Free<br>
+                            ✅ Commercial use OK<br>
+                            ⚠️ Read fine print
+                        </div>
+                        <div class="website-card">
+                            <strong>Adobe Stock</strong><br>
+                            💰 Costs money<br>
+                            ✅ Legal protection<br>
+                            ✅ Professional quality
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        🚨 <strong>NEVER USE:</strong> Google Images, Pinterest, random websites, or images without clear licenses!
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Find 3 Legal Images</div>
+                    <p>Go to <strong>Unsplash.com</strong> and find 3 images you could use for a restaurant website:</p>
+                    <ol>
+                        <li>One food photo</li>
+                        <li>One restaurant interior photo</li>
+                        <li>One happy customer photo</li>
+                    </ol>
+                    <p>For each image, copy the <strong>direct link</strong> and note the license information.</p>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Legal_Images"<br>
+                        <strong>For each image, include:</strong><br>
+                        • Image description (e.g., "pasta dish photo")<br>
+                        • Direct URL link<br>
+                        • License type (usually "Unsplash License")<br>
+                        <strong>Submit for grading!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <h3>📚 Quick Reference</h3>
+            
+            <div class="sidebar-section">
+                <h4>Key Terms</h4>
+                <div class="key-term">
+                    <strong>Copyright:</strong> Legal protection for creative work
+                </div>
+                <div class="key-term">
+                    <strong>License:</strong> Permission to use someone's work
+                </div>
+                <div class="key-term">
+                    <strong>Commercial Use:</strong> Using for business/money
+                </div>
+                <div class="key-term">
+                    <strong>Model Release:</strong> Permission from people in photos
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Safe Websites</h4>
+                <div class="key-term">
+                    <strong>Unsplash.com</strong><br>Free, commercial OK
+                </div>
+                <div class="key-term">
+                    <strong>Pexels.com</strong><br>Free, read license
+                </div>
+                <div class="key-term">
+                    <strong>Adobe Stock</strong><br>Paid, fully protected
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Remember</h4>
+                <div class="key-term">
+                    ❌ Never use Google Images
+                </div>
+                <div class="key-term">
+                    ❌ No © symbol ≠ free to use
+                </div>
+                <div class="key-term">
+                    ✅ Always check license
+                </div>
+                <div class="key-term">
+                    ✅ Save license info
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HELP BUTTON -->
+    <button class="help-button" onclick="openHelp()">?</button>
+
+    <!-- HELP MODAL -->
+    <div id="helpModal" class="help-modal">
+        <div class="help-modal-content">
+            <span class="close" onclick="closeHelp()">&times;</span>
+            <h2>🆘 Need Help?</h2>
+            
+            <h3>Quick Answers:</h3>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <strong>Q: Can I use any image from Google?</strong><br>
+                A: NO! Google Images just shows you images from around the web - they're not free to use.
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <strong>Q: What's a license?</strong><br>
+                A: A license is like a permission slip that tells you how you can use someone's creative work.
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <strong>Q: Why do I need to worry about copyright?</strong><br>
+                A: Because using the wrong image can result in huge fines ($150,000+) and lawsuits.
+            </div>
+            
+            <h3>Still Stuck?</h3>
+            <ul>
+                <li>Hover over any blue text for quick definitions</li>
+                <li>Check the sidebar for key terms</li>
+                <li>When in doubt, choose Unsplash.com or Pexels.com</li>
+                <li>Always save the license information</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function openHelp() {
+            document.getElementById('helpModal').style.display = 'block';
+        }
+
+        function closeHelp() {
+            document.getElementById('helpModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('helpModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeHelp();
+            }
+        });
+    </script>
+</body>
+</html>

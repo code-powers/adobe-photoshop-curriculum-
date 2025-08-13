@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright & Legal Research Activity Cards</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(45deg, #FF1744, #F50057);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        .card-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #FF5722;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .card-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            padding-left: 40px;
+        }
+        .points {
+            background: #FFD700;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            float: right;
+            margin-top: -5px;
+        }
+        .card-content {
+            padding: 25px;
+        }
+        .learn-section {
+            background: #E3F2FD;
+            border: 3px solid #2196F3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .learn-title {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .key-info {
+            background: #FFF3E0;
+            border-left: 5px solid #FF9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .warning-box {
+            background: #FFEBEE;
+            border: 3px solid #F44336;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .task-section {
+            background: #F1F8E9;
+            border: 3px solid #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .task-title {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .submit-section {
+            background: #FCE4EC;
+            border: 3px solid #E91E63;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .submit-title {
+            color: #C2185B;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .example {
+            background: #F8F9FA;
+            border-left: 5px solid #6C757D;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .website-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .website-card {
+            background: #E8F5E8;
+            border: 2px solid #4CAF50;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .checklist {
+            background: #FFF9C4;
+            border: 2px solid #FBC02D;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .timer {
+            background: #FF5722;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .submission-format {
+            background: #E1F5FE;
+            border: 2px solid #0288D1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚖️ COPYRIGHT & LEGAL RESEARCH</h1>
+            <h2>Learn-As-You-Go Activity Cards</h2>
+            <p><em>Don't get sued! Learn copyright basics while finding legal images</em></p>
+        </div>
+
+        <!-- CARD 1 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">1</div>
+                <div class="card-title">Copyright Basics - The "Don't Get Sued" Rules</div>
+                <div class="points">15 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 8 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: What is Copyright?</div>
+                    <p><strong>Copyright = Legal protection for creative work.</strong> Think of it like a "Do Not Touch" sign on someone's art.</p>
+                    
+                    <div class="key-info">
+                        <strong>The Rule:</strong> If someone created it, they own it. You can't use it without permission (unless it's free or you buy a license).
+                    </div>
+
+                    <div class="warning-box">
+                        🚨 <strong>Reality Check:</strong> Using the wrong image can cost $150,000 in fines! That's not a joke - it's real lawsuits.
+                    </div>
+
+                    <p><strong>What's Protected by Copyright:</strong></p>
+                    <ul>
+                        <li>Photos (even phone pics)</li>
+                        <li>Artwork and illustrations</li>
+                        <li>Logo designs</li>
+                        <li>Music and videos</li>
+                    </ul>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Copyright Detective Quiz</div>
+                    <p>Answer these questions to test your understanding:</p>
+                    <ol>
+                        <li>Can you use any image you find on Google Images? (Yes/No)</li>
+                        <li>If an image doesn't have a © symbol, is it free to use? (Yes/No)</li>
+                        <li>What could happen if you use a copyrighted image illegally?</li>
+                        <li>Name 2 types of creative work protected by copyright.</li>
+                    </ol>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Copyright_Quiz"<br>
+                        <strong>Answer all 4 questions above</strong><br>
+                        <strong>Turn it in for immediate grading!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">2</div>
+                <div class="card-title">Safe Image Sources - Where to Find Legal Images</div>
+                <div class="points">20 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 10 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: Safe Places to Find Images</div>
+                    <p>Not all websites are equal! Some give you legal protection, others are copyright traps.</p>
+                    
+                    <div class="website-list">
+                        <div class="website-card">
+                            <strong>Unsplash.com</strong><br>
+                            ✅ Free<br>
+                            ✅ Commercial use OK<br>
+                            ⚠️ Check each image
+                        </div>
+                        <div class="website-card">
+                            <strong>Pexels.com</strong><br>
+                            ✅ Free<br>
+                            ✅ Commercial use OK<br>
+                            ⚠️ Read fine print
+                        </div>
+                        <div class="website-card">
+                            <strong>Adobe Stock</strong><br>
+                            💰 Costs money<br>
+                            ✅ Legal protection<br>
+                            ✅ Professional quality
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        🚨 <strong>NEVER USE:</strong> Google Images, Pinterest, random websites, or images without clear licenses!
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Find 3 Legal Images</div>
+                    <p>Go to <strong>Unsplash.com</strong> and find 3 images you could use for a restaurant website:</p>
+                    <ol>
+                        <li>One food photo</li>
+                        <li>One restaurant interior photo</li>
+                        <li>One happy customer photo</li>
+                    </ol>
+                    <p>For each image, copy the <strong>direct link</strong> and note the license information.</p>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Legal_Images"<br>
+                        <strong>For each image, include:</strong><br>
+                        • Image description (e.g., "pasta dish photo")<br>
+                        • Direct URL link<br>
+                        • License type (usually "Unsplash License")<br>
+                        <strong>Submit for grading!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">3</div>
+                <div class="card-title">Model Releases - When You Need Permission from People</div>
+                <div class="points">15 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 7 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 LEARN: Model & Location Releases</div>
+                    <p>Even if you legally own a photo, you might still need permission from people or property owners!</p>
+                    
+                    <div class="key-info">
+                        <strong>Model Release:</strong> Written permission from people in photos to use their image for business purposes.
+                    </div>
+
+                    <div class="checklist">
+                        <strong>You NEED a model release when:</strong>
+                        <ul>
+                            <li>Person's face is clearly recognizable</li>
+                            <li>Using photo for advertising/marketing</li>
+                            <li>Person is the main subject</li>
+                            <li>Photo implies they endorse your product</li>
+                        </ul>
+                    </div>
+
+                    <div class="example">
+                        <strong>Examples:</strong><br>
+                        ✅ <strong>Need Release:</strong> Photo of person holding your client's product<br>
+                        ❌ <strong>Don't Need:</strong> Crowd photo where no face is recognizable
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Model Release Decision Game</div>
+                    <p>For each scenario, decide if you need a model release:</p>
+                    <ol>
+                        <li>Photo of your friend for a business advertisement</li>
+                        <li>Crowd photo at a concert where no faces are clear</li>
+                        <li>Professional headshot of a CEO for company website</li>
+                        <li>Stock photo of a model eating at a restaurant</li>
+                    </ol>
+                    <p>Answer "Yes" or "No" and explain why for each.</p>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 SUBMIT TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_Model_Release_Quiz"<br>
+                        <strong>For each scenario:</strong><br>
+                        • Answer Yes or No<br>
+                        • Explain your reasoning<br>
+                        <strong>Submit when complete!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="activity-card">
+            <div class="card-header">
+                <div class="card-number">4</div>
+                <div class="card-title">Client Project - Legal Image Research</div>
+                <div class="points">25 POINTS</div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="card-content">
+                <div class="timer">⏰ 15 MINUTES</div>
+
+                <div class="learn-section">
+                    <div class="learn-title">📚 REAL-WORLD APPLICATION</div>
+                    <p>Now you'll use everything you learned to find legal images for an actual client project!</p>
+                    
+                    <div class="key-info">
+                        <strong>Your Client:</strong> "Bite-Sized Bistro" - a healthy fast-casual restaurant targeting busy professionals who order lunch on their phones.
+                    </div>
+
+                    <div class="checklist">
+                        <strong>What they need:</strong>
+                        <ul>
+                            <li>Mobile app graphics</li>
+                            <li>Social media posts</li>
+                            <li>Outdoor signage</li>
+                            <li>Website photos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="task-section">
+                    <div class="task-title">🎯 YOUR TASK: Build a Legal Image Library</div>
+                    <p>Find 5 different images that Bite-Sized Bistro could legally use:</p>
+                    <ol>
+                        <li><strong>Healthy food photo</strong> (for menu/website)</li>
+                        <li><strong>Busy professional eating</strong> (for marketing - check model release!)</li>
+                        <li><strong>Modern restaurant interior</strong> (for website)</li>
+                        <li><strong>Food preparation/kitchen</strong> (for social media)</li>
+                        <li><strong>Mobile phone with food app</strong> (for advertising)</li>
+                    </ol>
+                    
+                    <div class="warning-box">
+                        Remember: If people's faces are visible and recognizable, note whether a model release would be needed!
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <div class="submit-title">📤 FINAL SUBMISSION TO GOOGLE CLASSROOM:</div>
+                    <div class="submission-format">
+                        <strong>Create a Google Doc titled:</strong> "YourName_BiteSized_Legal_Images"<br><br>
+                        <strong>For each of the 5 images, include:</strong><br>
+                        • Description of image<br>
+                        • Website source (Unsplash, Pexels, etc.)<br>
+                        • Direct URL link<br>
+                        • License type<br>
+                        • Model release needed? (Yes/No/N/A)<br>
+                        • How this image helps the client<br><br>
+                        <strong>Submit for final grading!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px;">
+            <h3>🏆 CONGRATULATIONS!</h3>
+            <p style="font-size: 1.2em; margin: 0;">You now understand copyright law better than most small business owners!</p>
+            <p style="margin: 10px 0 0 0;"><strong>Total Points Possible: 75</strong></p>
+        </div>
+    </div>
+</body>
+</html>
